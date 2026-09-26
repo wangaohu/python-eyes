@@ -1,12 +1,4 @@
-"""
-python-eyes —— 基于 OpenCV 的实时颜色识别与计数 Demo
 
-用法：
-    python main.py                # 使用默认摄像头
-    python main.py --camera 1     # 换一个摄像头
-    python main.py --no-window    # 不弹窗口，只写日志（用于无显示环境）
-
-运行后按 q 退出。每帧识别到的色块会追加写入 log.csv。
 """
 
 import argparse
@@ -18,8 +10,8 @@ from collections import Counter
 import cv2
 import numpy as np
 
-# ---------------------------------------------------------------- 可调参数
-AREA_MIN = 800          # 面积阈值：小于这个像素面积的色块当作噪点丢掉
+
+AREA_MIN = 800
 FRAME_W, FRAME_H = 640, 480
 LOG_PATH = "log.csv"
 
@@ -109,7 +101,7 @@ def main() -> int:
                     cv2.putText(frame, f"{name} {int(area)}", (x, max(y - 8, 15)),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
-            # FPS 做一点平滑，不然数字会乱跳
+           
             instant = 1.0 / max(now - prev_time, 1e-6)
             prev_time = now
             fps = instant if fps == 0 else fps * 0.9 + instant * 0.1
@@ -135,8 +127,8 @@ def main() -> int:
         for name, count in counters.most_common():
             print(f"  {name}: 检测到 {count} 次")
     else:
-        print("  一帧都没识别到色块，检查一下画面里有没有红/绿/蓝/黄的物体。")
-    print(f"明细已写入 {LOG_PATH}")
+        print("  没识别到色块，检查一下画面里有没有红/绿/蓝/黄的物体。")
+    print(f"已写入 {LOG_PATH}")
     return 0
 
 
