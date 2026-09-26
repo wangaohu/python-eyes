@@ -1,0 +1,21 @@
+# Python 运行产物
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 本项目运行时生成的日志
+log.csv
+
+# 编辑器
+.vscode/
+.idea/
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
